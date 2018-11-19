@@ -1,4 +1,4 @@
-package com.jeeps.arqapp.rest.ws;
+package com.arqapps.pedidosapi.ws;
 
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;

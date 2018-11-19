@@ -14,4 +14,8 @@ public class PedidoDao {
         pedidos.add(new Pedido(3, "pedido", 240L, false));
         pedidos.add(new Pedido(4, "pedido", 240L, false));
     }
+
+    public List<Pedido> getPedidos() {
+        return pedidos;
+    }
 }
