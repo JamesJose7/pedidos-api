@@ -31,4 +31,14 @@ public class PedidoService {
             return Response.ok(updatedPedido).build();
         return Response.status(Response.Status.NOT_FOUND).build();
     }
+
+    @DELETE
+    @Path("/{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response deletePedido(@PathParam("id") long id) {
+        Pedido deletedPedido = pedidoDao.deletePedido(id);
+        if (deletedPedido != null)
+            return Response.ok(Response.Status.NO_CONTENT).build();
+        return Response.status(Response.Status.NOT_FOUND).build();
+    }
 }

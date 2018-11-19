@@ -32,6 +32,15 @@ public class PedidoDao {
         return null;
     }
 
+    public Pedido deletePedido(long id) {
+        OptionalInt index = getPos(id);
+        if (index.isPresent()) {
+            pedidos.remove(index.getAsInt());
+            return pedidos.get(index.getAsInt());
+        }
+        return null;
+    }
+
     private OptionalInt getPos(long id) {
         return IntStream.range(0, pedidos.size())
                 .filter(i -> pedidos.get(i).getId() == id)
