@@ -3,10 +3,9 @@ package com.arqapps.pedidosapi.ws;
 import com.arqapps.pedidosapi.dao.PedidoDao;
 import com.arqapps.pedidosapi.model.Pedido;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.Response;
 import java.util.List;
 
 @Path("order")
@@ -17,7 +16,19 @@ public class PedidoService {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Pedido> getAllPedidos() {
-        return pedidoDao.getPedidos();
+    public Response getAllPedidos() {
+        return Response.ok(pedidoDao.getPedidos()).build();
+    }
+
+    @PUT
+    @Path("/{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response updatePedido(@PathParam("id") long id, Pedido pedido) {
+        pedido.setId(id);
+        Pedido updatedPedido = pedidoDao.updatePedido(pedido);
+        if (updatedPedido != null)
+            return Response.ok(updatedPedido).build();
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 }

@@ -3,7 +3,11 @@ package com.arqapps.pedidosapi.dao;
 import com.arqapps.pedidosapi.database.Database;
 import com.arqapps.pedidosapi.model.Pedido;
 
+import javax.swing.text.html.Option;
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.stream.IntStream;
 
 public class PedidoDao {
     private static List<Pedido> pedidos = Database.getPedidos();
@@ -17,5 +21,20 @@ public class PedidoDao {
 
     public List<Pedido> getPedidos() {
         return pedidos;
+    }
+
+    public Pedido updatePedido(Pedido pedido) {
+        OptionalInt index = getPos(pedido.getId());
+        if (index.isPresent()) {
+            pedidos.set(index.getAsInt(), pedido);
+            return pedido;
+        }
+        return null;
+    }
+
+    private OptionalInt getPos(long id) {
+        return IntStream.range(0, pedidos.size())
+                .filter(i -> pedidos.get(i).getId() == id)
+                .findFirst();
     }
 }
