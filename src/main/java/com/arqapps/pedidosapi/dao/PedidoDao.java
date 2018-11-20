@@ -29,6 +29,10 @@ public class PedidoDao {
         return pedidos;
     }
 
+    /** Busca y retorna un {@link Pedido} según el id ingresado
+     * @param id utilizado para buscar el pedido
+     * @return Retorna un pedido si es econtrado o un null en caso contrario
+     */
     public Pedido getPedido(int id) {
         Optional<Pedido> pedido = pedidos.stream()
                 .filter(p -> id == p.getId())
@@ -44,7 +48,6 @@ public class PedidoDao {
 
         return pedido;
     }
-
 
     public Pedido updatePedido(Pedido pedido) {
         OptionalInt index = getPos(pedido.getId());
@@ -64,6 +67,10 @@ public class PedidoDao {
         return null;
     }
 
+    /** Retorna la posición del Pedido encontrado según el id
+     * @param id Id utilizado para la búsqueda del pedido
+     * @return OptionalInt que servirá para obtener la posición encontrada o saber si no se encontró la posición
+     */
     private OptionalInt getPos(long id) {
         return IntStream.range(0, pedidos.size())
                 .filter(i -> pedidos.get(i).getId() == id)
