@@ -26,11 +26,9 @@ public class PedidoService {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getProduct(@PathParam("id") int id) {
         Pedido pedido = pedidoDao.getPedido(id);
-        if (pedido != null) {
+        if (pedido != null)
             return Response.ok(pedido).build();
-        } else {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
+        return Response.status(Response.Status.NOT_FOUND).build();
     }
 
     @POST

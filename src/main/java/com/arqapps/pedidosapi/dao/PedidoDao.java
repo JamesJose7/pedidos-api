@@ -13,10 +13,16 @@ public class PedidoDao {
     private static List<Pedido> pedidos = Database.getPedidos();
 
     public PedidoDao() {
-        pedidos.add(new Pedido(1, "pedido", 240L, false));
-        pedidos.add(new Pedido(2, "pedido", 240L, false));
-        pedidos.add(new Pedido(3, "pedido", 240L, false));
-        pedidos.add(new Pedido(4, "pedido", 240L, false));
+        pedidos.add(new Pedido(1, "Ensalada de frutas", 254, false));
+        pedidos.add(new Pedido(2, "Papas con pollo ", 789, false));
+        pedidos.add(new Pedido(3, "Jugo de mora", 456, true));
+        pedidos.add(new Pedido(4, "Banana Split", 789, false));
+        pedidos.add(new Pedido(5, "Pizza familiar", 456, false));
+        pedidos.add(new Pedido(6, "Lomo de res", 123, false));
+        pedidos.add(new Pedido(7, "Parrillada JR", 456, true));
+        pedidos.add(new Pedido(8, "Jarra de limonada", 123, false));
+        pedidos.add(new Pedido(9, "Sanduche Mixto", 852, false));
+        pedidos.add(new Pedido(10, "Cuarto de Chorizo", 936, true));
     }
 
     public List<Pedido> getPedidos() {
@@ -31,12 +37,8 @@ public class PedidoDao {
     }
 
     public Pedido addPedido(Pedido pedido) {
-        int max ;
         int size = pedidos.size();
-        if (size > 0)
-            max = Math.toIntExact(pedidos.get(size - 1).getId() + 1);
-        else
-            max = 1;
+        int max = size > 0 ? Math.toIntExact(pedidos.get(size - 1).getId() + 1) : 1;
         pedido.setId(max);
         pedidos.add(pedido);
 
