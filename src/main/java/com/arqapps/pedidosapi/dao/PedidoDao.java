@@ -23,6 +23,27 @@ public class PedidoDao {
         return pedidos;
     }
 
+    public Pedido getPedido(int id) {
+        Optional<Pedido> pedido = pedidos.stream()
+                .filter(p -> id == p.getId())
+                .findFirst();
+        return pedido.orElse(null);
+    }
+
+    public Pedido addPedido(Pedido pedido) {
+        int max ;
+        int size = pedidos.size();
+        if (size > 0)
+            max = Math.toIntExact(pedidos.get(size - 1).getId() + 1);
+        else
+            max = 1;
+        pedido.setId(max);
+        pedidos.add(pedido);
+
+        return pedido;
+    }
+
+
     public Pedido updatePedido(Pedido pedido) {
         OptionalInt index = getPos(pedido.getId());
         if (index.isPresent()) {
